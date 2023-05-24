@@ -18,6 +18,7 @@ app.layout = html.Div([
 ])
 
 @app.callback(
+    Output("upload-data", "children"),
     Output("plot", "figure"),
     Input("upload-data", "contents"),
     State("upload-data", "filename"),
@@ -25,9 +26,8 @@ app.layout = html.Div([
 )
 def update_output(contents, fname):
     if contents is not None:
-        print("hotdog")
         fig = parse_upload(contents, fname)
-        return fig
+        return html.Div(style={"hidden":True}), fig
 
 if __name__ == "__main__":
     app.run_server(debug=True)
